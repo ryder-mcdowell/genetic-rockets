@@ -1,34 +1,34 @@
 class DNA {
 
   PVector[] genes;
-  float maxForce = 0.1;
 
   DNA() {
     genes = new PVector[LIFETIME];
     for (int i = 0; i < genes.length; i++) {
       genes[i] = PVector.random2D();
-      genes[i].mult(random(0, maxForce));
+      genes[i].mult(random(0, MAX_FORCE));
     }
   }
 
-  // DNA crossover(DNA partner) {
-  //   DNA child = new DNA(mutationRate);
+  Rocket crossover(DNA partnerDNA) {
+    Rocket child = new Rocket(new PVector(STARTING_LOCATION_X, STARTING_LOCATION_Y));
     
-  //   int coinFace;
-  //   for (int i = 0; i < genes.length; i++) {
-  //     coinFace = int(random(2));
-  //     if (coinFace == 0) child.genes[i] = genes[i];
-  //     else child.genes[i] = partner.genes[i];
-  //   }
+    int coinFace;
+    for (int i = 0; i < genes.length; i++) {
+      coinFace = int(random(2));
+      if (coinFace == 0) child.dna.genes[i] = genes[i];
+      else child.dna.genes[i] = partnerDNA.genes[i];
+    }
 
-  //   return child;
-  // }
+    return child;
+  }
 
-  // void mutate() {
-  //   for (int i = 0; i < genes.length; i++) {
-  //     if (random(1) < mutationRate) {
-  //       genes[i] = (char)random(32,128);
-  //     }
-  //   }
-  // }
+  void mutate() {
+    for (int i = 0; i < genes.length; i++) {
+      if (random(1) < MUTATION_RATE) {
+        genes[i] = PVector.random2D();
+        genes[i].mult(random(0, MAX_FORCE));
+      }
+    }
+  }
 }

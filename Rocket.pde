@@ -23,7 +23,7 @@ class Rocket {
   }
 
   float fitness() {
-    float distance = PVector.dist(position, new PVector(0,0)); //!
+    float distance = PVector.dist(position, new PVector(TARGET_LOCATION_X, TARGET_LOCATION_Y));
     return 1.0 / distance;
   }
 
