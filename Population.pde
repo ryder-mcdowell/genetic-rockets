@@ -12,10 +12,16 @@ class Population {
     }
   }
 
+  boolean inTarget(PVector position) {
+    return (position.x < TARGET_LOCATION_X + (TARGET_DIAMETER/2 - ROCKET_SIZE) && position.x > TARGET_LOCATION_X - (TARGET_DIAMETER/2 - ROCKET_SIZE)) && (position.y < TARGET_LOCATION_Y + (TARGET_DIAMETER/2 - ROCKET_SIZE) && position.y > TARGET_LOCATION_Y - (TARGET_DIAMETER/2 - ROCKET_SIZE));
+  }
+
   void live() {
     for (int i = 0; i < population.length; i++) {
-      population[i].run();
-      population[i].display();
+      if (!inTarget(population[i].position)) {
+        population[i].run();
+        population[i].display();
+      }
     }
   }
 
